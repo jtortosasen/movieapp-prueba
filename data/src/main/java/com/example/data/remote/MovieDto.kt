@@ -45,12 +45,12 @@ fun MovieDto.mapToDomain(index: Int): Movie {
     return Movie(
         id = index,
         adult = this.adult,
-        backdropPath = (ApiEndpoints.imageBaseUrl + ApiEndpoints.imageOriginalSizeUrl + this.backdropPath + "?api_key=" + BuildConfig.API_KEY) ?: "",
+        backdropPath = (ApiEndpoints.imageBaseUrl + ApiEndpoints.imageOriginalSizeUrl + this.backdropPath + "?api_key=" + "") ?: "",
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = (ApiEndpoints.imageBaseUrl + ApiEndpoints.imagePosterSizeUrl + this.posterPath + "?api_key=" + BuildConfig.API_KEY) ?: "",
+        posterPath = (ApiEndpoints.imageBaseUrl + ApiEndpoints.imagePosterSizeUrl + this.posterPath + "?api_key=" + "") ?: "",
         releaseDate = this.releaseDate,
         title = this.title,
         voteAverage = this.voteAverage

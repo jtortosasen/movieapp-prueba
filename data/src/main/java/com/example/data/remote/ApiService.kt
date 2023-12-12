@@ -13,7 +13,7 @@ import kotlinx.serialization.json.Json
 
 
 class ApiService {
-    private val bearerToken = BuildConfig.BEARER_TOKEN
+    private val bearerToken = ""
 
     private val client = HttpClient() {
         install(ContentNegotiation){
