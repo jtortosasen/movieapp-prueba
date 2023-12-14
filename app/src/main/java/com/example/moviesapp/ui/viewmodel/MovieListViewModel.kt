@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
 import arrow.core.right
-import com.example.data.remote.Error
-import com.example.data.usecases.MoviesUseCase
+import com.example.domain.models.Error
+import com.example.domain.usecases.MoviesUseCase
 import com.example.domain.models.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

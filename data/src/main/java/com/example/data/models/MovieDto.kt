@@ -1,6 +1,6 @@
-package com.example.data.remote
+package com.example.data.models
 
-import com.example.data.BuildConfig
+import com.example.data.remote.ApiEndpoints
 import com.example.domain.models.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

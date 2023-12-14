@@ -1,14 +1,12 @@
-package com.example.data.usecases
+package com.example.domain.usecases
 
-import android.util.Log
 import arrow.core.Either
 import arrow.core.flatMap
-import com.example.data.remote.ApiService
-import com.example.data.remote.Error
-import com.example.data.remote.mapToDomain
+import com.example.domain.data.IApiService
 import com.example.domain.models.Movie
+import com.example.domain.models.Error
 
-class MoviesUseCase(private val api: ApiService) {
+class MoviesUseCase(private val api: IApiService) {
 
     private var cachedMovies: Either<Error, List<Movie>>? = null
 
@@ -16,8 +14,8 @@ class MoviesUseCase(private val api: ApiService) {
          cachedMovies?.let { return it }
          return when(val eitherResult = api.receivePopularMovies()) {
              is Either.Right -> {
-                 val resultDomain = eitherResult.value.results.mapIndexed() { index, movieDto ->  movieDto.mapToDomain(index) }
-                 Either.Right(resultDomain).also { cachedMovies = it  }
+                 val result = eitherResult.value
+                 Either.Right(result).also { cachedMovies = it  }
              }
              is Either.Left -> Either.Left(eitherResult.value)
          }
@@ -31,6 +29,5 @@ class MoviesUseCase(private val api: ApiService) {
                     ?: Either.Left(Error.Unknown("Película no encontrada"))
             }
         } ?: Either.Left(Error.Unknown("Película no encontrada"))
-
     }
 }

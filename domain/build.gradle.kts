@@ -16,3 +16,10 @@ android {
         jvmTarget = "17"
     }
 }
+dependencies {
+    implementation("io.ktor:ktor-client-core:2.3.2")
+
+    //Arrow
+    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
+    implementation("io.arrow-kt:arrow-core")
+}
