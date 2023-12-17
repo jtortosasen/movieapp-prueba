@@ -17,9 +17,9 @@ android {
     }
 }
 dependencies {
-    implementation("io.ktor:ktor-client-core:2.3.2")
+    implementation(libs.ktor.client.core)
 
     //Arrow
-    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
-    implementation("io.arrow-kt:arrow-core")
+    implementation(platform(libs.arrow.kt.stack))
+    implementation(libs.arrow.kt.core)
 }

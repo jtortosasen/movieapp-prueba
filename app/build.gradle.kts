@@ -4,33 +4,16 @@ plugins {
 }
 
 android {
-    namespace = "com.example.moviesapp"
-    compileSdk = 34
     defaultConfig {
-        applicationId = "com.example.moviesapp"
-        minSdk = 27
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        sourceSets {
-            getByName("main").java.srcDirs("src/main/kotlin")
-            getByName("test").java.srcDirs("src/test/kotlin")
-        }
-
-        applicationVariants.configureEach {
-            val variantName = name
-            kotlin.sourceSets {
-                getByName(variantName).kotlin.srcDir("build/generated/ksp/$variantName/kotlin")
-            }
-        }
+        applicationId = "com.example.composeapp"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
     }
 
-    buildFeatures.compose = true
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.6"
-    }
+    namespace = "com.example.composeapp"
+    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -40,39 +23,47 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures.compose = true
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.6"
+    }
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    // Android
+    implementation(libs.appcompat)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
 
     // Compose
-    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.01.00"))
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
-    implementation("androidx.navigation:navigation-compose:2.6.0")
-    implementation("io.coil-kt:coil:2.4.0")
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.preview)
+
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 
     // Koin
-    implementation("io.insert-koin:koin-core:3.4.2")
-    implementation("io.insert-koin:koin-android:3.4.2")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.2")
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     //Arrow
-    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
-    implementation("io.arrow-kt:arrow-core")
+    implementation(platform(libs.arrow.kt.stack))
+    implementation(libs.arrow.kt.core)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

@@ -1,25 +1,25 @@
+plugins {
+    kotlin("jvm") version "1.9.21"
+    kotlin("plugin.serialization") version "1.9.21"
+}
+
 buildscript {
     repositories {
-        mavenLocal()
-        mavenCentral()
         google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.2.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+        classpath(libs.gradle)
+        classpath(libs.kotlin.gradle.plugin)
     }
-}
-
-plugins {
-    kotlin("jvm") version "1.9.21"
-    kotlin("plugin.serialization") version "1.8.22"
 }
 
 allprojects {
     repositories {
-        mavenLocal()
-        mavenCentral()
         google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 }

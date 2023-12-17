@@ -1,20 +1,12 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization")
 }
-
-//val secretsProperties = Properties()
-//file("secrets.properties").inputStream().use { secretsProperties.load(it) }
 
 android {
     namespace = "com.example.data"
     compileSdk = 34
-
-//    defaultConfig {
-//        buildConfigField("String", "API_KEY", "\"${secretsProperties["API_KEY"]}\"")
-//        buildConfigField("String", "BEARER_TOKEN", "\"${secretsProperties["BEARER_TOKEN"]}\"")
-//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -29,21 +21,23 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(libs.kotlinx.serialization.json)
+
     //Ktor
-    implementation("io.ktor:ktor-client-core:2.3.2")
-    implementation("io.ktor:ktor-client-okhttp:2.3.2")
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.2")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.2")
-    testImplementation("io.ktor:ktor-client-mock:2.3.2")
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    testImplementation(libs.ktor.client.mock)
 
     // Koin
-    implementation("io.insert-koin:koin-core:3.4.2")
-    implementation("io.insert-koin:koin-android:3.4.2")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.2")
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     //Arrow
-    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
-    implementation("io.arrow-kt:arrow-core")
+    implementation(platform(libs.arrow.kt.stack))
+    implementation(libs.arrow.kt.core)
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }
