@@ -1,8 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("plugin.serialization")
 }
+
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = "com.example.data"
@@ -11,6 +18,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures.buildConfig = true
+    buildTypes{
+        debug {
+            buildConfigField("String", "BEARER_TOKEN", keystoreProperties["bearerToken"].toString())
+        }
     }
 
     kotlinOptions {
@@ -41,3 +54,20 @@ dependencies {
 
     testImplementation(libs.junit)
 }
+
+
+
+
+//fun getApiKey(): String {
+//    val items = HashMap<String, String>()
+//
+//    val fl = rootProject.file("data/gradle.properties")
+//
+//    (fl.exists()).let {
+//        fl.forEachLine {
+//            items[it.split("=")[0]] = it.split("=")[1]
+//        }
+//    }
+//
+//    return items["BEARER_TOKEN"]!!
+//}

@@ -2,6 +2,7 @@ package com.example.data.remote
 
 import android.util.Log
 import arrow.core.Either
+import com.example.data.BuildConfig
 import com.example.data.models.MovieResultDto
 import com.example.data.models.mapToDomain
 import com.example.domain.data.IApiService
@@ -17,8 +18,8 @@ import kotlinx.serialization.json.Json
 
 
 class ApiService: IApiService {
-    private val bearerToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZGVjZWYyNWMzMzY2NTYyNmRhZDE5NzQ5ZWZlNDVhYSIsInN1YiI6IjY1N2ExMmE1NTY0ZWM3MDBjNDc0Y2I3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t9R1cqyQov8WLiZgOiZji-pS62SeJRRRLLo-Rh-gon0"
-    private val client = HttpClient() {
+    private val bearerToken = BuildConfig.BEARER_TOKEN
+        private val client = HttpClient() {
         install(ContentNegotiation){
             json(Json {
                 ignoreUnknownKeys = true
